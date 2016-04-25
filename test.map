@@ -1,16 +1,16 @@
 5
 ##start
-0 1 5
+deb 1 5
 ##end
 fin 0 2
 1 2 0
 2 4 5
 3 3 3
 4 4 4
-0-2
+deb-2
 #klsjfd
 2-3
-0-1
+deb-1
 1-3
 4-3
 4-fin

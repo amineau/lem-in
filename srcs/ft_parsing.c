@@ -148,7 +148,7 @@ int     ft_pars(t_global *glob)
         tube = tmp->tube;
         while (tube)
         {
-            ft_printf(" -> %s ", tube->room->name);
+            ft_printf(" -> %-3s ", tube->room->name);
             tube = tube->next;
         }
         ft_printf(")\n");

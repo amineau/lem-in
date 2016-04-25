@@ -3,11 +3,14 @@
 void    ft_starting_room(t_global *glob) //(t_room *start, t_ant **ant)
 {
     t_ant   *ant;
-    
+    t_room  *start;
     ant = *(glob->ant);
+    start = *(glob->room);
+    while (start->pos != 0)
+        start = start->next;
     while (ant)
     {
-        ant->room = *(glob->room);
+        ant->room = start;
         ant = ant->next;
     }
 }
