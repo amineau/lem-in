@@ -1,6 +1,6 @@
 #include "lem-in.h"
 
-void    ft_starting_room(t_global *glob)
+void    ft_starting_room(t_global *glob) //(t_room *start, t_ant **ant)
 {
     t_ant   *ant;
     

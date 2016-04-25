@@ -24,12 +24,12 @@ typedef struct	s_tube
 
 struct			s_room
 {
-	int		id;
-	char	name;
+	char	*name;
 	int		x;
 	int		y;
 	int		pos;
 	t_tube	*tube;
+	t_room	*next;
 };
 
 typedef struct	s_ant
@@ -43,14 +43,13 @@ typedef struct	s_global
 {
 	t_ant	**ant;
 	t_room	**room;
-	char	*r;
-	char	*t;
-	int		start;
-	int		end;
+	char	*hill;
+	int		tunnel;
 }				t_global;
 
 
 t_global    *ft_recovery(void);
+int			ft_pars(t_global *glob);
 
 int			ft_check_digit(char *str);
 
@@ -58,6 +57,8 @@ void    	ft_error(t_global *glob);
 void    	ft_clear(t_global *glob);
 
 void    	ft_listadd_ant(t_ant **begin, int id);
+void		ft_listadd_room(t_room **begin, char **tab, int pos);
+void		ft_listadd_tube(t_room *room, t_room *add);
 void    	ft_starting_room(t_global *glob);
 
 

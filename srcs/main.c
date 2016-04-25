@@ -17,7 +17,7 @@ int main(void)
     t_global    *glob;
     
     glob = ft_recovery();
-    
+    ft_pars(glob);
     /********* Test t_ant **********/
     t_ant   *tmp;
     tmp = *(glob->ant);
@@ -26,7 +26,6 @@ int main(void)
         ft_printf("L%d\n", tmp->id);
         tmp = tmp->next;
     }
-    ft_printf(glob->hill);
     /*******************************/
 	return (0);
 }

@@ -12,11 +12,15 @@
 
 #include "libft.h"
 
-static int	ft_endline(char *buf)
+static int	ft_endline(char *buf, char *line, int ret)
 {
 	int i;
 
 	i = 0;
+	if (ret == 0 && (!line || line[0] == '\0'))
+		return (0);
+	else if (ret == 0)
+		return (1);
 	while (buf[i])
 	{
 		if (buf[i] == '\n')
@@ -90,9 +94,7 @@ int			get_next_line(const int fd, char **line)
 		if ((ret = read(fd, buf, BUFF_SIZE)) == -1)
 			return (-1);
 		buf[ret] = '\0';
-		back = ft_endline(buf);
-		if (ret == 0)
-			back = 0;
+		back = ft_endline(buf, *line, ret);
 		rest = ft_trac(rest, &buf);
 		*line = ft_strclnjoin(*line, buf);
 	}
