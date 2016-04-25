@@ -28,7 +28,7 @@ int         ft_reading_anthill(t_global *glob, char *ptr)
         if (ft_strcmp(ptr, "##start") && ft_strcmp(ptr, "##end"))
             return (2);
     }
-    else if (!glob->tunnel && tab[2])
+    else if (!glob->tunnel && tab[1])
     {
         if (!ft_check_digit(tab[1]) || !ft_check_digit(tab[2]) || tab[3])
             return (0);
@@ -49,11 +49,12 @@ t_global    *ft_recovery(void)
     int         status_read;
     t_global    *glob;
     
+
     glob = (t_global*)ft_memalloc(sizeof(t_global));
     glob->hill = (char*)ft_memalloc(1);
     glob->tunnel = 0;
     status_read = 1;
-    while (get_next_line(0, &ptr) == 1)// && status_read)
+    while (get_next_line(0, &ptr) == 1 && status_read)
 	{
 	    if (status_read == 1)
 	        status_read = ft_reading_ant(glob, ptr);

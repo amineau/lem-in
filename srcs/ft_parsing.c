@@ -28,13 +28,13 @@ char    ***ft_pars_room(char **tab)
     char    ***room;
     
     length = 0;
-    while (tab[length + 1] && (ft_strchr(tab[length + 1], ' ') || tab[length + 1][0] == '#'))
+    while (tab[length] && (ft_strchr(tab[length], ' ') || tab[length][0] == '#'))
         length++;
     room = (char***)ft_memalloc(sizeof(char**) * (length + 1));
     i = -1;
-    while (i++ < length)
+    while (++i < length)
         room[i] = ft_strsplit(tab[i], ' ');
-    room[length + 1] = NULL;
+    room[length] = NULL;
     //clear tab
     return (room);
 }
@@ -93,22 +93,18 @@ void    ft_stock_tunnel(t_global *glob, char ***tunnel)
     }
 }
 
-int     ft_pars(t_global *glob)
+void    ft_pars(t_global *glob)
 {
     char    ***tunnel;
     char    ***room;
-    
+
     room = ft_pars_room(ft_strsplit(glob->hill, '\n'));
     tunnel = ft_pars_tunnel(ft_strsplit(glob->hill, '\n'));
-    
     ft_stock_room(glob, room);
     ft_stock_tunnel(glob, tunnel);
     //ft_strdel(&glob->hill);
     
-    //ft_start(glob, room);
-    //ft_tunnel(glob, name, tunnel);
-    
-    /*Display room*/
+    /****************Display room****************/
     int i;
     int j;
     
@@ -155,7 +151,5 @@ int     ft_pars(t_global *glob)
         tmp = tmp->next;
     }
     ft_printf("********************\n");
-    /****************/
-    
-    return (0);
+    /************************************************/
 }

@@ -19,12 +19,17 @@ int main(void)
     glob = ft_recovery();
     ft_pars(glob);
     ft_starting_room(glob);
-    /********* Test t_ant **********/
+    
+    /******** Test t_ant *********/
     t_ant   *tmp;
     tmp = *(glob->ant);
     while (tmp)
     {
-        ft_printf("L%d-%s\n", tmp->id, tmp->room->name);
+        ft_printf("L%d-%s-%d", tmp->id, tmp->room->name, tmp->move);
+        if (tmp->next)
+            ft_putchar(' ');
+        else
+            ft_putchar('\n');
         tmp = tmp->next;
     }
     /*******************************/

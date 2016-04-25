@@ -35,6 +35,7 @@ struct			s_room
 typedef struct	s_ant
 {
 	int				id;
+	int				move;
 	t_room			*room;
 	struct s_ant	*next;
 }				t_ant;
@@ -49,7 +50,7 @@ typedef struct	s_global
 
 
 t_global    *ft_recovery(void);
-int			ft_pars(t_global *glob);
+void		ft_pars(t_global *glob);
 
 int			ft_check_digit(char *str);
 
@@ -61,5 +62,6 @@ void		ft_listadd_room(t_room **begin, char **tab, int pos);
 void		ft_listadd_tube(t_room *room, t_room *add);
 void    	ft_starting_room(t_global *glob);
 
+void	ft_display(t_global *glob);
 
 #endif

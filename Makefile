@@ -41,7 +41,7 @@ all: $(OPATH) $(NAME)
 $(NAME): $(OBJ)
 	@echo "$(YELLOW)Compilation Libft$(WHITE)"
 	@make -C $(LIBPATH)
-	@$(CC) $(CFLAGS) -o $@ $^ $(LIBS) \
+	@$(CC) $(CFLAGS) $(LIBS) -o $@ $^ \
 	&& printf "$(YELLOW)%-30s$(DARK)-->>\t$(GREEN)$@$(WHITE)\n" "Compilation"\
 	|| (printf "$(YELLOW)%-30s$(DARK)-->>\t$(RED)$@$(WHITE)\n" "Compilation" \
 	&& exit 1)

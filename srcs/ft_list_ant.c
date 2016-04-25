@@ -11,6 +11,7 @@ void    ft_starting_room(t_global *glob) //(t_room *start, t_ant **ant)
     while (ant)
     {
         ant->room = start;
+        ant->move = 0;
         ant = ant->next;
     }
 }
