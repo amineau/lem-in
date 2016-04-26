@@ -39,25 +39,28 @@ char    ***ft_pars_room(char **tab)
     return (room);
 }
 
-void    ft_stock_room(t_global *glob, char ***room)
+int     ft_stock_room(t_global *glob, char ***room)
 {
     int i;
+    int id;
     
     i = 0;
+    id = 2;
     glob->room = (t_room**)ft_memalloc(sizeof(t_room*));
     while (room[i])
     {
         if (!ft_strcmp(room[i][0], "##start"))
             ft_listadd_room(glob->room, room[++i], 0);
         else if (!ft_strcmp(room[i][0], "##end"))
-            ft_listadd_room(glob->room, room[++i], 2);
+            ft_listadd_room(glob->room, room[++i], 1);
         else
-            ft_listadd_room(glob->room, room[i], 1);
+            ft_listadd_room(glob->room, room[i], id++);
         i++;
     }
+    return (id);
 }
 
-t_room  *ft_find_room(t_room **room, char *name)
+int     ft_find_idroom(t_room **room, char *name)
 {
     t_room  *tmp;
     
@@ -65,32 +68,33 @@ t_room  *ft_find_room(t_room **room, char *name)
     while (tmp)
     {
         if (!ft_strcmp(tmp->name, name))
-            return (tmp);
+            return (tmp->pos);
         tmp = tmp->next;
     }
-    return (NULL);
+    return (-1);
 }
 
-void    ft_stock_tunnel(t_global *glob, char ***tunnel)
+int     **ft_stock_tunnel(t_global *glob, char ***tunnel)
 {
-    t_room  *tmp;
     int     i;
-    
-    tmp = *(glob->room);
-    while (tmp)
+    int     **matrice;
+    int     x;
+    int     y;
+
+    matrice = (int**)ft_memalloc(sizeof(int*) * glob->length);
+    i = 0;
+    while (i < glob->length)
+        matrice[i++] = (int*)ft_memalloc(sizeof(int) * glob->length);
+    i = 0;
+    while (tunnel[i])
     {
-        //tmp->tube = (t_tube**)ft_memalloc(sizeof(t_tube*));
-        i = 0;
-        while (tunnel[i])
-        {
-            if (!ft_strcmp(tunnel[i][0], tmp->name))
-                ft_listadd_tube(tmp, ft_find_room(glob->room, tunnel[i][1]));
-            else if (!ft_strcmp(tunnel[i][1], tmp->name))
-                ft_listadd_tube(tmp, ft_find_room(glob->room, tunnel[i][0]));
-            i++;
-        }
-        tmp = tmp->next;
+        x = ft_find_idroom(glob->room, tunnel[i][0]);
+        y = ft_find_idroom(glob->room, tunnel[i][1]);
+        matrice[x][y] = 1;
+        matrice[y][x] = 1;
+        i++;
     }
+    return matrice;
 }
 
 void    ft_pars(t_global *glob)
@@ -100,8 +104,8 @@ void    ft_pars(t_global *glob)
 
     room = ft_pars_room(ft_strsplit(glob->hill, '\n'));
     tunnel = ft_pars_tunnel(ft_strsplit(glob->hill, '\n'));
-    ft_stock_room(glob, room);
-    ft_stock_tunnel(glob, tunnel);
+    glob->length = ft_stock_room(glob, room);
+    glob->matrice = ft_stock_tunnel(glob, tunnel);
     //ft_strdel(&glob->hill);
     
     /****************Display room****************/
@@ -133,7 +137,7 @@ void    ft_pars(t_global *glob)
     }
     ft_printf("********************\n");
     /****************/
-    /*Display list*/
+    /*Display room*/
     ft_printf("***stockage room***\n");
     t_room *tmp;
     t_tube *tube;

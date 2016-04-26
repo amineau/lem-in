@@ -22,6 +22,13 @@ typedef struct	s_tube
 	struct s_tube	*next;
 }				t_tube;
 
+typedef struct 	s_path
+{
+	t_room			*room;
+	struct s_path	*next;
+
+}				t_path;
+
 struct			s_room
 {
 	char	*name;
@@ -45,12 +52,15 @@ typedef struct	s_global
 	t_ant	**ant;
 	t_room	**room;
 	char	*hill;
+	int		**matrice;
+	int		length;
 	int		tunnel;
 }				t_global;
 
 
 t_global    *ft_recovery(void);
 void		ft_pars(t_global *glob);
+int			ft_path(int **matrice, int length, int id, int cnt);
 
 int			ft_check_digit(char *str);
 
@@ -60,8 +70,9 @@ void    	ft_clear(t_global *glob);
 void    	ft_listadd_ant(t_ant **begin, int id);
 void		ft_listadd_room(t_room **begin, char **tab, int pos);
 void		ft_listadd_tube(t_room *room, t_room *add);
+t_path		*ft_listcreate_path(t_room *room);
 void    	ft_starting_room(t_global *glob);
 
-void	ft_display(t_global *glob);
+void		ft_display(t_global *glob);
 
 #endif

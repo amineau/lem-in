@@ -19,7 +19,27 @@ int main(void)
     glob = ft_recovery();
     ft_pars(glob);
     ft_starting_room(glob);
-    
+    ft_path(glob->matrice, glob->length, 0, 0);
+
+
+    /******** Test Matrice *********/
+    ft_printf("****************************Matrice*****************************\n");
+    int i = 0;
+    int j;
+    ft_printf("   ");
+    while (i < glob->length)
+        ft_printf("%2d ", i++);
+    ft_printf("\n");
+    i = 0;
+    while (i < glob->length)
+    {
+        j = 0;
+        ft_printf("%2d ", i);
+        while (j < glob->length)
+            ft_printf("%2d ", glob->matrice[i][j++]);
+        i++;
+        ft_printf("\n");
+    }
     /******** Test t_ant *********/
     t_ant   *tmp;
     tmp = *(glob->ant);
