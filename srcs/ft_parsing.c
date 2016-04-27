@@ -46,7 +46,9 @@ int     ft_stock_room(t_global *glob, char ***room)
     
     i = 0;
     id = 2;
+    
     glob->room = (t_room**)ft_memalloc(sizeof(t_room*));
+    
     while (room[i])
     {
         if (!ft_strcmp(room[i][0], "##start"))
@@ -71,6 +73,7 @@ int     ft_find_idroom(t_room **room, char *name)
             return (tmp->pos);
         tmp = tmp->next;
     }
+    
     return (-1);
 }
 
@@ -106,25 +109,14 @@ void    ft_pars(t_global *glob)
     tunnel = ft_pars_tunnel(ft_strsplit(glob->hill, '\n'));
     glob->length = ft_stock_room(glob, room);
     glob->matrice = ft_stock_tunnel(glob, tunnel);
-    //ft_strdel(&glob->hill);
+    ft_strdel(&glob->hill);
     
     /****************Display room****************/
-    int i;
+   /* int i;
     int j;
     
-    ft_printf("***parsing room***\n");
-    i = 0;
-    while (room[i])
-    {
-        j = 0;
-        while (room[i][j])
-            ft_printf("%s ", room[i][j++]);
-        ft_putchar('\n');
-        i++;
-    }
-    ft_printf("********************\n");
-    /**************/
-    /*Display tunnel*/
+   
+
     ft_printf("***parsing tunnel***\n");
     i = 0;
     while (tunnel[i])
@@ -136,24 +128,47 @@ void    ft_pars(t_global *glob)
         i++;
     }
     ft_printf("********************\n");
-    /****************/
-    /*Display room*/
+
     ft_printf("***stockage room***\n");
     t_room *tmp;
-    t_tube *tube;
     tmp = *(glob->room);
     while (tmp)
     {
-        ft_printf("name : %4s | x : %2d | y = %2d | pos : %d | tube (", tmp->name, tmp->x, tmp->y, tmp->pos);
-        tube = tmp->tube;
-        while (tube)
-        {
-            ft_printf(" -> %-3s ", tube->room->name);
-            tube = tube->next;
-        }
-        ft_printf(")\n");
+        ft_printf("name : %4s | x : %2d | y = %2d | pos : %d)\n", tmp->name, tmp->x, tmp->y, tmp->pos);
         tmp = tmp->next;
     }
-    ft_printf("********************\n");
+    ft_printf("********************\n"); */
     /************************************************/
+    //     ft_printf("***parsing tunnel***\n");
+    // int i = 0;
+    // int j;
+    // while (tunnel[i])
+    // {
+    //     j = 0;
+    //     while (tunnel[i][j])
+    //       ft_printf("%s ", tunnel[i][j++]);
+    //     ft_putchar('\n');
+    //     i++;
+    // }
+    // ft_printf("********************\n");
+    //  ft_printf("***parsing room***\n");
+    // i = 0;
+    // while (room[i])
+    // {
+    //     j = 0;
+    //     while (room[i][j])
+    //         ft_printf("%s ", room[i][j++]);
+    //     ft_putchar('\n');
+    //     i++;
+    // }
+    // ft_printf("********************\n");
+    // ft_printf("***stockage room***\n");
+    // t_room *tmp;
+    // tmp = *(glob->room);
+    // while (tmp)
+    // {
+    //     ft_printf("name : %4s | x : %2d | y = %2d | pos : %d)\n", tmp->name, tmp->x, tmp->y, tmp->pos);
+    //     tmp = tmp->next;
+    // }
+    // ft_printf("********************\n");
 }

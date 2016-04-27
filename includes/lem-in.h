@@ -14,14 +14,6 @@
 # define LEM_IN_H
 # include "libft.h"
 
-typedef struct	s_room t_room;
-
-typedef struct	s_tube
-{
-	t_room			*room;
-	struct s_tube	*next;
-}				t_tube;
-
 typedef struct 	s_path
 {
 	int				*path;
@@ -29,15 +21,14 @@ typedef struct 	s_path
 	struct s_path	*next;
 }				t_path;
 
-struct			s_room
+typedef struct	s_room
 {
-	char	*name;
-	int		x;
-	int		y;
-	int		pos;
-	t_tube	*tube;
-	t_room	*next;
-};
+	char			*name;
+	int				x;
+	int				y;
+	int				pos;
+	struct s_room	*next;
+}				t_room;
 
 typedef struct	s_ant
 {
@@ -82,11 +73,10 @@ void    	ft_clear(t_global *glob);
 
 void    	ft_listadd_ant(t_ant **begin, int id);
 void		ft_listadd_room(t_room **begin, char **tab, int pos);
-void		ft_listadd_tube(t_room *room, t_room *add);
 void    	ft_listadd_path(t_path **begin, int *path, int size);
 t_path   	*ft_listcreate_path(int *path, int size);
 void		ft_starting_room(t_ant **ant);
 
-void		ft_display(t_ant **ant);
+void		ft_display(t_ant **ant, char **list);
 
 #endif
