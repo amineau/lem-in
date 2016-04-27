@@ -15,6 +15,7 @@ CC = gcc
 
 SRCS = main.c ft_clear.c ft_error.c ft_list_ant.c ft_recovery.c ft_check_digit.c \
 		ft_parsing.c ft_list_room.c ft_list_tube.c ft_list_path.c ft_path.c \
+		ft_max_path.c ft_moving_ant.c ft_display.c
 
 LIBPATH = libft
 SPATH = srcs

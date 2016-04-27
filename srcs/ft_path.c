@@ -18,38 +18,10 @@ int *ft_tabcpy(int *tab, int length)
 int	ft_path(t_matrice *m, int id, int cnt)
 {
 	int	x;
-	
-	
-/******** Test Matrice *********/
-	ft_printf("****************************Matrice*****************************\n");
-    int i = 0;
-    int j;
-    ft_printf("   ");
-    while (i < m->length)
-        ft_printf("%2d ", i++);
-    ft_printf("\n");
-    i = 0;
-    while (i < m->length)
-    {
-        j = 0;
-        ft_printf("%2d ", i);
-        while (j < m->length)
-        {
-            if (m->matrice[i][j])
-            	ft_printf("\033[32m%2d \033[0m", m->matrice[i][j++]);
-            else
-                ft_printf("%2d ", m->matrice[i][j++]);
-        }
-        i++;
-        ft_printf("\n");
-    }
- /********************************/
- 
  
 	if (id != 1)
 	{
 		x = 0;
-		ft_printf("id = %d\n", id);
 		while (x < m->length)
 		{
 			if (m->matrice[id][x])
@@ -65,17 +37,66 @@ int	ft_path(t_matrice *m, int id, int cnt)
 			x++;
 		}
 	}
-
 	if (id == 1 && cnt < m->min)
 	{
-	    ft_printf("cnt = %d || m->min = %d || path = ", cnt, m->min);
 	    m->min = cnt;
 	    m->path_min = ft_tabcpy(m->tmp, m->length);
-	    	i = 0;
-	    while (i < m->min)
-	        ft_printf("%d ", m->path_min[i++]);
 	}
-
 	cnt = 0;
 	return (cnt);
+}
+
+void    ft_clear_tab(int *tab, int length)
+{
+    int i;
+    
+    i = 0;
+    while (i < length)
+        tab[i++] = 0;
+}
+
+void    ft_clear_matrice(int **matrice, int length, int id)
+{
+    int i;
+    
+    i = 0;
+    while (i < length)
+    {
+        matrice[id][i] = 0;
+        matrice[i++][id] = 0;
+    }
+}
+
+void    ft_reset_matrice(t_matrice *m, t_path **p)
+{
+    t_path  *tmp;
+    int     i;
+    
+    tmp = *p;
+    m->min = m->length + 1;
+    ft_clear_tab(m->path_min, m->length);
+    ft_clear_tab(m->tmp, m->length);
+    while (tmp)
+    {
+        i = 0;
+        while (tmp->path[i] != 1)
+            ft_clear_matrice(m->matrice, m->length, tmp->path[i++]);
+        tmp = tmp->next;
+    }
+}
+
+t_path  **ft_algo_multi(t_matrice *m, int max_path)
+{
+    t_path  **p;
+    
+    p = (t_path**)ft_memalloc(sizeof(t_path*));
+    ft_path(m, 0, 0);
+    *p = ft_listcreate_path(m->path_min, m->min);
+     while (--max_path > 0)
+     {
+         ft_reset_matrice(m, p);
+         ft_path(m, 0, 0);
+         ft_listadd_path(p, m->path_min, m->min);
+     }
+     return (p);
 }

@@ -1,19 +1,18 @@
 #include "lem-in.h"
 
-void	ft_display(t_global *glob)
+void	ft_display(t_ant **ant)
 {
 	t_ant   *tmp;
-    tmp = *(glob->ant);
+    tmp = *ant;
     while (tmp)
     {
-    	if (tmp->move)
+    	if (tmp->move && tmp->room != 1)
     	{
-	        ft_printf("L%d-%s", tmp->id, tmp->room->name);
+	        ft_printf("L%d-%d", tmp->id, tmp->room);
 	        if (tmp->next)
 	            ft_putchar(' ');
-	        else
-	            ft_putchar('\n');
     	}
         tmp = tmp->next;
     }
+    ft_putchar('\n');
 }

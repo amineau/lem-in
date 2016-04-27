@@ -24,9 +24,9 @@ typedef struct	s_tube
 
 typedef struct 	s_path
 {
-	t_room			*room;
+	int				*path;
+	int				size;
 	struct s_path	*next;
-
 }				t_path;
 
 struct			s_room
@@ -43,7 +43,7 @@ typedef struct	s_ant
 {
 	int				id;
 	int				move;
-	t_room			*room;
+	int				room;
 	struct s_ant	*next;
 }				t_ant;
 
@@ -69,9 +69,13 @@ typedef struct	s_matrice
 
 t_global    *ft_recovery(void);
 void		ft_pars(t_global *glob);
-int			ft_path(t_matrice *m, int id, int cnt);
+t_path		**ft_algo_multi(t_matrice *m, int max_path);
+void		ft_moving_ant(t_global *glob, t_path **p);
 
 int			ft_check_digit(char *str);
+int			ft_max_path(t_ant **ant, t_matrice *m);
+int			*ft_tabcpy(int *tab, int length);
+void    	ft_clear_tab(int *tab, int length);
 
 void    	ft_error(t_global *glob);
 void    	ft_clear(t_global *glob);
@@ -79,9 +83,10 @@ void    	ft_clear(t_global *glob);
 void    	ft_listadd_ant(t_ant **begin, int id);
 void		ft_listadd_room(t_room **begin, char **tab, int pos);
 void		ft_listadd_tube(t_room *room, t_room *add);
-t_path		*ft_listcreate_path(t_room *room);
-void    	ft_starting_room(t_global *glob);
+void    	ft_listadd_path(t_path **begin, int *path, int size);
+t_path   	*ft_listcreate_path(int *path, int size);
+void		ft_starting_room(t_ant **ant);
 
-void		ft_display(t_global *glob);
+void		ft_display(t_ant **ant);
 
 #endif

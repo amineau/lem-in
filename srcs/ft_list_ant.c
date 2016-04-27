@@ -1,18 +1,15 @@
 #include "lem-in.h"
 
-void    ft_starting_room(t_global *glob) //(t_room *start, t_ant **ant)
+void    ft_starting_room(t_ant **ant)
 {
-    t_ant   *ant;
-    t_room  *start;
-    ant = *(glob->ant);
-    start = *(glob->room);
-    while (start->pos != 0)
-        start = start->next;
-    while (ant)
+    t_ant   *tmp;
+
+    tmp = *ant;
+    while (tmp)
     {
-        ant->room = start;
-        ant->move = 0;
-        ant = ant->next;
+        tmp->room = 0;
+        tmp->move = 0;
+        tmp = tmp->next;
     }
 }
 
