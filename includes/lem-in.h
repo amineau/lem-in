@@ -57,10 +57,19 @@ typedef struct	s_global
 	int		tunnel;
 }				t_global;
 
+typedef struct	s_matrice
+{
+	int	**matrice;
+	int	length;
+	int	min;
+	int	*path_min;
+	int	*tmp;
+}				t_matrice;
+
 
 t_global    *ft_recovery(void);
 void		ft_pars(t_global *glob);
-int			ft_path(int **matrice, int length, int id, int cnt);
+int			ft_path(t_matrice *m, int id, int cnt);
 
 int			ft_check_digit(char *str);
 

@@ -12,14 +12,25 @@
 
 #include "lem-in.h"
 
+void    ft_initialize(t_matrice *m, t_global *glob)
+{
+    m->matrice = glob->matrice;
+    m->length = glob->length;
+    m->min = m->length;
+    m->tmp = (int*)ft_memalloc(sizeof(int) * m->length);
+}
+
 int main(void)
 {
     t_global    *glob;
+    t_matrice   *matrice;
     
     glob = ft_recovery();
+    matrice = (t_matrice*)ft_memalloc(sizeof(t_matrice));
     ft_pars(glob);
     ft_starting_room(glob);
-    ft_path(glob->matrice, glob->length, 0, 0);
+    ft_initialize(matrice, glob);
+    ft_path(matrice, 0, 0);
 
 
     /******** Test Matrice *********/
@@ -41,6 +52,9 @@ int main(void)
         ft_printf("\n");
     }
     /******** Test t_ant *********/
+    	    	i = 0;
+	    while (i < matrice->min)
+	        ft_printf("%d ", matrice->path_min[i++]);
     t_ant   *tmp;
     tmp = *(glob->ant);
     while (tmp)
