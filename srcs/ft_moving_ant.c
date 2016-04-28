@@ -18,10 +18,7 @@ int     ft_check_disp_room(t_path *p, t_ant *ant, int *tab)
             {
                 if (ant->room == p->path[i])
                 {
-                    if (tab[p->path[i + 1]] == 0)
-                        ft_simple_move(ant, p->path[i + 1], tab);
-                    else
-                        return (0);
+                    ft_simple_move(ant, p->path[i + 1], tab);
                     return (1);
                 }
                 i++;

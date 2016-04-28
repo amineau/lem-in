@@ -37,8 +37,8 @@ int ft_max_path(t_ant **ant, t_matrice *m)
     tab[0] = ft_cnt_ant(ant);
     tab[1] = ft_cnt_entry(m->matrice[0], m->length);
     tab[2] = ft_cnt_entry(m->matrice[1], m->length);
-    int i;
-    for(i = 0; i<3; i++)
-        ft_printf("%d\n", tab[i]);
-    return (ft_min((int*)tab, 3));
+    if (m->matrice[0][1])
+        return (tab[0]);
+    else
+        return (ft_min((int*)tab, 3));
 }
