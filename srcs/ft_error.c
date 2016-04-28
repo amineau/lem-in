@@ -1,8 +1,7 @@
 #include "lem-in.h"
 
-void    ft_error(t_global *glob)
+void    ft_error(void)
 {
-    ft_clear(glob);
     ft_printf("ERROR\n");
-    exit(1);
+    exit(EXIT_FAILURE);
 }

@@ -28,11 +28,14 @@ int     ft_check_disp_room(t_path *p, t_ant *ant, int *tab)
     return (0);
 }
 
-int     ft_check_start_room(t_path *p, t_ant *ant, int *tab)
+int     ft_check_start_room(t_path *p, t_ant *ant, int *tab, int cnt)
 {
+    int size_min;
+
+    size_min = p->size;
     while (p)
     {
-        if (tab[p->path[0]] == 0)
+        if (tab[p->path[0]] == 0 && p->size - size_min <= cnt)
         {
             ft_simple_move(ant, p->path[0], tab);
             return (1);
@@ -56,40 +59,27 @@ int     ft_check_finish(t_ant **ant)
     return (1);
 }
 
-char    **ft_listing_room(t_room *room, int length)
-{
-    char    **list;
-    
-    list = (char**)ft_memalloc(sizeof(char*) * length);
-    while (room)
-    {
-        list[room->pos] = room->name;
-        room = room->next;
-    }
-    return (list);
-}
-
 void    ft_moving_ant(t_global *glob, t_path **p)
 {
     int     tab[glob->length];
+    int     cnt_ant;
     t_ant   *ant;
-    t_path  *tmp;
     
     ft_clear_tab(tab, glob->length);
+    cnt_ant = ft_cnt_ant(glob->ant);
     while (!ft_check_finish(glob->ant))
     {
         ant = *(glob->ant);
         while (ant)
         {
-            tmp = *p;
             if (ant->room == 0)
-                ant->move = ft_check_start_room(tmp, ant, tab);
+                ant->move = ft_check_start_room(*p, ant, tab, cnt_ant - ant->id);
             else if (ant->room != 1)
-                ant->move = ft_check_disp_room(tmp, ant, tab);
+                ant->move = ft_check_disp_room(*p, ant, tab);
             else
                 ant->move = 0;
             ant = ant->next;
         }
-        ft_display(glob->ant, ft_listing_room(*(glob->room), glob->length));
+        ft_display(glob->ant, glob->room);
     }
 }

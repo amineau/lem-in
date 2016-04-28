@@ -3,6 +3,7 @@
 void	ft_display(t_ant **ant, char **list)
 {
 	t_ant   *tmp;
+    
     tmp = *ant;
     while (tmp)
     {

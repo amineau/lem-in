@@ -41,8 +41,9 @@ int	ft_path(t_matrice *m, int id, int cnt)
 	{
 	    m->min = cnt;
 	    m->path_min = ft_tabcpy(m->tmp, m->length);
+        cnt = 0;
 	}
-	cnt = 0;
+	
 	return (cnt);
 }
 
@@ -91,12 +92,15 @@ t_path  **ft_algo_multi(t_matrice *m, int max_path)
     
     p = (t_path**)ft_memalloc(sizeof(t_path*));
     ft_path(m, 0, 0);
+    if (m->min > m->length)
+        ft_error();
     *p = ft_listcreate_path(m->path_min, m->min);
      while (--max_path > 0)
      {
          ft_reset_matrice(m, p);
          ft_path(m, 0, 0);
-         ft_listadd_path(p, m->path_min, m->min);
+         if (m->min <= m->length)
+            ft_listadd_path(p, m->path_min, m->min);
      }
      return (p);
 }

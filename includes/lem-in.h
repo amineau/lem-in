@@ -21,15 +21,6 @@ typedef struct 	s_path
 	struct s_path	*next;
 }				t_path;
 
-typedef struct	s_room
-{
-	char			*name;
-	int				x;
-	int				y;
-	int				pos;
-	struct s_room	*next;
-}				t_room;
-
 typedef struct	s_ant
 {
 	int				id;
@@ -41,7 +32,7 @@ typedef struct	s_ant
 typedef struct	s_global
 {
 	t_ant	**ant;
-	t_room	**room;
+	char	**room;
 	char	*hill;
 	int		**matrice;
 	int		length;
@@ -66,13 +57,13 @@ void		ft_moving_ant(t_global *glob, t_path **p);
 int			ft_check_digit(char *str);
 int			ft_max_path(t_ant **ant, t_matrice *m);
 int			*ft_tabcpy(int *tab, int length);
+int			ft_cnt_ant(t_ant **begin);
 void    	ft_clear_tab(int *tab, int length);
 
-void    	ft_error(t_global *glob);
+void    	ft_error(void);
 void    	ft_clear(t_global *glob);
 
 void    	ft_listadd_ant(t_ant **begin, int id);
-void		ft_listadd_room(t_room **begin, char **tab, int pos);
 void    	ft_listadd_path(t_path **begin, int *path, int size);
 t_path   	*ft_listcreate_path(int *path, int size);
 void		ft_starting_room(t_ant **ant);
