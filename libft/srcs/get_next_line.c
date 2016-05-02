@@ -98,5 +98,7 @@ int			get_next_line(const int fd, char **line)
 		rest = ft_trac(rest, &buf);
 		*line = ft_strclnjoin(*line, buf);
 	}
+	if (back == 0)
+		ft_strdel(&rest);
 	return (back);
 }

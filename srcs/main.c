@@ -25,7 +25,7 @@ int main(void)
     t_global    *glob;
     t_matrice   *matrice;
     t_path      **p;
-    
+
     glob = ft_recovery();
     matrice = (t_matrice*)ft_memalloc(sizeof(t_matrice));
     ft_pars(glob);
@@ -35,5 +35,7 @@ int main(void)
     ft_putnbrendl(ft_cnt_ant(glob->ant));
     ft_putendl(glob->hill);
     ft_moving_ant(glob, p);
+    ft_clear_path(p);
+    ft_clear_glob(glob);
 	return (0);
 }

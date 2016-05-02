@@ -54,6 +54,11 @@ void		ft_pars(t_global *glob);
 t_path		**ft_algo_multi(t_matrice *m, int max_path);
 void		ft_moving_ant(t_global *glob, t_path **p);
 
+char        ***ft_pars_room(char **tab);
+char 		***ft_pars_tunnel(t_global *glob);
+void        ft_stock_room(t_global *glob, char ***room);
+int         **ft_stock_tunnel(t_global *glob, char ***tunnel);
+
 int			ft_check_digit(char *str);
 int			ft_max_path(t_ant **ant, t_matrice *m);
 int			*ft_tabcpy(int *tab, int length);
@@ -61,7 +66,13 @@ int			ft_cnt_ant(t_ant **begin);
 void    	ft_clear_tab(int *tab, int length);
 
 void    	ft_error(void);
-void    	ft_clear(t_global *glob);
+void		ft_clear_tabchar(char **tab);
+void		ft_clear_ant(t_ant **ant);
+void    	ft_clear_tabint(int *tab, int length);
+void    	ft_clear_matrice(t_matrice *m);
+void		ft_clear_dbltab(char ***tab);
+void		ft_clear_path(t_path **path);
+void		ft_clear_glob(t_global *glob);
 
 void    	ft_listadd_ant(t_ant **begin, int id);
 void    	ft_listadd_path(t_path **begin, int *path, int size);

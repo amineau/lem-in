@@ -74,7 +74,7 @@ void    ft_moving_ant(t_global *glob, t_path **p)
     int     cnt_ant;
     t_ant   *ant;
     
-    ft_clear_tab(tab, glob->length);
+    ft_clear_tabint(tab, glob->length);
     cnt_ant = ft_cnt_ant(glob->ant);
     while (!ft_check_finish(glob->ant))
     {

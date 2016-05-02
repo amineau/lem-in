@@ -44,22 +44,14 @@ int	ft_path(t_matrice *m, int id, int cnt)
 	if (id == 1 && cnt < m->min)
 	{
 	    m->min = cnt;
+        ft_memdel((void**)&(m->path_min));
 	    m->path_min = ft_tabcpy(m->tmp, m->length);
         cnt = 0;
 	}
 	return (cnt);
 }
 
-void    ft_clear_tab(int *tab, int length)
-{
-    int i;
-    
-    i = 0;
-    while (i < length)
-        tab[i++] = 0;
-}
-
-void    ft_clear_matrice(int **matrice, int length, int id)
+void    ft_clean_matrice(int **matrice, int length, int id)
 {
     int i;
     
@@ -69,7 +61,7 @@ void    ft_clear_matrice(int **matrice, int length, int id)
         matrice[id][i] = 0;
         matrice[i++][id] = 0;
     }
-}
+} 
 
 void    ft_reset_matrice(t_matrice *m, t_path **p)
 {
@@ -78,15 +70,15 @@ void    ft_reset_matrice(t_matrice *m, t_path **p)
     
     tmp = *p;
     m->min = m->length + 1;
-    ft_clear_tab(m->path_min, m->length);
-    ft_clear_tab(m->tmp, m->length);
+    ft_clear_tabint(m->path_min, m->length);
+    ft_clear_tabint(m->tmp, m->length);
     while (tmp)
     {
         i = 0;
         if (tmp->path[0] == 1)
             ft_set_matrice(m->matrice, 0, 1, 0);
         while (tmp->path[i] != 1)
-            ft_clear_matrice(m->matrice, m->length, tmp->path[i++]);
+            ft_clean_matrice(m->matrice, m->length, tmp->path[i++]);
         tmp = tmp->next;
     }
 }
@@ -96,7 +88,9 @@ t_path  **ft_algo_multi(t_matrice *m, int max_path)
     t_path  **p;
     
     p = (t_path**)ft_memalloc(sizeof(t_path*));
+    ft_putendl("coucou");
     ft_path(m, 0, 0);
+    ft_putendl("coucou");
     if (m->min > m->length)
         ft_error();
     *p = ft_listcreate_path(m->path_min, m->min);
@@ -107,5 +101,6 @@ t_path  **ft_algo_multi(t_matrice *m, int max_path)
          if (m->min <= m->length)
             ft_listadd_path(p, m->path_min, m->min);
      }
+     ft_clear_matrice(m);
      return (p);
 }
