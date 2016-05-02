@@ -16,34 +16,29 @@ int         ft_reading_ant(t_global *glob, char *ptr)
     return (2);
 }
 
-int         ft_reading_anthill(t_global *glob, char *ptr, int status_read)
+int         ft_reading_anthill(t_global *glob, char *ptr)
 {
     char    **tab;
     
     if (!ft_strcmp(ptr, ""))
         return (0);
     tab = ft_strsplit(ptr, ' '); //tab à free ***************************************
-    if (ptr[0] == '#' && status_read != 3)
+    if (ptr[0] == '#')
     {
         if (ft_strcmp(ptr, "##start") && ft_strcmp(ptr, "##end"))
             return (2);
     }
     else if (!glob->tunnel && tab[1])
     {
-        if (!ft_check_digit(tab[1]) || !tab[2] || !ft_check_digit(tab[2]) || tab[3])
+        if (!ft_check_digit(tab[1]) || !tab[2] || !ft_check_digit(tab[2])
+        || tab[3] || ptr[0] == 'L')
             ft_error();
     }
-    else if (status_read == 3 || ptr[0] == 'L')
-        ft_error();
+    // else if (status_read == 3)
+    //     ft_error();
     else
-    {
-        if (tab[1] || !ft_strchr(ptr, '-'))
-            ft_error();
         glob->tunnel = 1;
-    }
     glob->hill = ft_straddc(ft_strcln1join(glob->hill, ptr), '\n');
-    if (!ft_strcmp(ptr, "##start") || !ft_strcmp(ptr, "##end"))
-        return (3);
     return (2);
 }
 
@@ -53,7 +48,6 @@ t_global    *ft_recovery(void)
     int         status_read;
     t_global    *glob;
     
-
     glob = (t_global*)ft_memalloc(sizeof(t_global));
     glob->hill = (char*)ft_memalloc(1);
     glob->tunnel = 0;
@@ -63,9 +57,8 @@ t_global    *ft_recovery(void)
 	    if (status_read == 1)
 	        status_read = ft_reading_ant(glob, ptr);
 	    else
-	        status_read = ft_reading_anthill(glob, ptr, status_read);
+	        status_read = ft_reading_anthill(glob, ptr);
 		ft_strdel(&ptr);
 	}
-    ft_putendl(glob->hill);
 	return (glob);
 }

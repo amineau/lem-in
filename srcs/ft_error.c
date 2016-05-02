@@ -2,6 +2,6 @@
 
 void    ft_error(void)
 {
-    ft_printf("ERROR\n");
+    ft_putendl_fd("ERROR", 2);
     exit(EXIT_FAILURE);
 }

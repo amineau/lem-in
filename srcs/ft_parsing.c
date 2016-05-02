@@ -1,22 +1,61 @@
 #include "lem-in.h"
 
-char    ***ft_pars_tunnel(char **tab)
+int     ft_cmp_name(char *tun, char **room)
+{
+    int i;
+    
+    i = 0;
+    while (room[i])
+    {
+        if (!ft_strcmp(tun, room[i++]))
+            return (1);
+    }
+    return (0);
+}
+
+char    **ft_chtun(char **tab, int id, t_global *glob)
+{
+    char    **tun;
+    char    *str;
+    int     i;
+    
+    tun = ft_strsplit(tab[id], '-');
+    if (!tun[1] || tun[2] || !ft_strcmp(tun[0], tun[1])
+    || !ft_cmp_name(tun[0], glob->room) || !ft_cmp_name(tun[1], glob->room))
+    {
+        i = 0;
+        str = glob->hill;
+        while (i++ < id)
+            str = ft_strchr(&str[1], '\n');
+        str[1] = '\0';
+        //tun à free
+        return (NULL);
+    }
+    return (tun);
+}
+
+char    ***ft_pars_tunnel(t_global *glob)
 {
     int     i;
-    int     length;
+    int     lth;
+    char    **tab;
     char    ***tunnel;
     
     i = 0;
+    tab = ft_strsplit(glob->hill, '\n');
     while (tab[i] && (ft_strchr(tab[i], ' ') || tab[i][0] == '#'))
         i++;
-    length = 0;
-    while (tab[i + length])
-        length++;
-    tunnel = (char***)ft_memalloc(sizeof(char**) * (length + 1));
-    length = -1;
-    while (tab[i + ++length])
-        tunnel[length] = ft_strsplit(tab[i + length], '-');
-    tunnel[length] = NULL;
+    lth = 0;
+    while (tab[i + lth])
+        lth++;
+    tunnel = (char***)ft_memalloc(sizeof(char**) * (lth + 1));
+    lth = -1;
+    while (tab[i + ++lth])
+    {
+        if (!(tunnel[lth] = ft_chtun(tab, i + lth, glob)))
+            break;
+    }
+    tunnel[lth] = NULL;
     //clear tab
     return (tunnel);
 }
@@ -26,28 +65,21 @@ int     ft_length_partone(char **tab)
     int     start;
     int     end;
     int     i;
-    int     length;
-    int     bol;
 
-    i = -1;
+    i = 0;
     start = 0;
     end = 0;
-    bol = 0;
-    while (tab[++i])
+    while (tab[i] && (ft_strchr(tab[i], ' ') || tab[i][0] == '#'))
     {
         if (!ft_strcmp(tab[i], "##start"))
             start++;
         if (!ft_strcmp(tab[i], "##end"))
             end++;
-        if (!ft_strchr(tab[i], ' ') && tab[i][0] != '#' && bol == 0)
-        {
-            bol = 1;
-            length = i;
-        }
+        i++;
     }
     if (start != 1 || end != 1)
         ft_error();
-    return (length);
+    return (i);
 }
 
 char    ***ft_pars_room(char **tab)
@@ -132,7 +164,8 @@ int     ft_cnt_room(char ***room)
     cnt = 0;
     while (room[i])
     {
-        if (!ft_strcmp(room[i][0], "##start") || !ft_strcmp(room[i][0], "##end"))
+        if (!ft_strcmp(room[i][0], "##start")
+        || !ft_strcmp(room[i][0], "##end"))
         {
             i++;
             cnt++;
@@ -144,6 +177,26 @@ int     ft_cnt_room(char ***room)
     return (cnt);
 }
 
+void    ft_check_double(char **room)
+{
+    int i;
+    int j;
+    
+    i = 0;
+    while (room[i])
+    {
+        if (ft_strchr(room[i], '-'))
+            ft_error();
+        j = i;
+        while (room[++j])
+        {
+            if (!ft_strcmp(room[i], room[j]))
+                ft_error();
+        }
+        i++;
+    }
+}
+
 void    ft_pars(t_global *glob)
 {
     char    ***tunnel;
@@ -151,10 +204,10 @@ void    ft_pars(t_global *glob)
 
     room = ft_pars_room(ft_strsplit(glob->hill, '\n'));
     glob->length = ft_cnt_room(room);
-    tunnel = ft_pars_tunnel(ft_strsplit(glob->hill, '\n'));
     ft_stock_room(glob, room);
+    tunnel = ft_pars_tunnel(glob);
+    ft_check_double(glob->room);
     glob->matrice = ft_stock_tunnel(glob, tunnel);
-    
     /************************************************/
     //     ft_printf("***parsing matrice***\n");
     // int i = 0;

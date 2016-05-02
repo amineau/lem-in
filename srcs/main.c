@@ -32,6 +32,8 @@ int main(void)
     ft_starting_room(glob->ant);
     ft_initialize(matrice, glob);
     p = ft_algo_multi(matrice, ft_max_path(glob->ant, matrice));
+    ft_putnbrendl(ft_cnt_ant(glob->ant));
+    ft_putendl(glob->hill);
     ft_moving_ant(glob, p);
 	return (0);
 }

@@ -11,6 +11,7 @@ void    ft_simple_move(t_ant *ant, int room, int *tab)
 int     ft_check_disp_room(t_path *p, t_ant *ant, int *tab)
 {
     int i;
+
     while (p)
     {
             i = 0;
@@ -28,16 +29,24 @@ int     ft_check_disp_room(t_path *p, t_ant *ant, int *tab)
     return (0);
 }
 
-int     ft_check_start_room(t_path *p, t_ant *ant, int *tab, int cnt)
+int     ft_start_path(t_path *p, t_ant *ant, int *tab, int cnt)
 {
     int size_min;
 
-    size_min = p->size;
+    if (p->size == 0)
+    {
+        p = p->next;
+        size_min = 1;
+    }
+    else
+        size_min = p->size;
     while (p)
     {
         if (tab[p->path[0]] == 0 && p->size - size_min <= cnt)
         {
             ft_simple_move(ant, p->path[0], tab);
+            if (p->size == 1)
+                p->size = 0;
             return (1);
         }          
         p = p->next;
@@ -69,11 +78,13 @@ void    ft_moving_ant(t_global *glob, t_path **p)
     cnt_ant = ft_cnt_ant(glob->ant);
     while (!ft_check_finish(glob->ant))
     {
+         if ((*p)->size == 0)
+            (*p)->size = 1;
         ant = *(glob->ant);
         while (ant)
         {
             if (ant->room == 0)
-                ant->move = ft_check_start_room(*p, ant, tab, cnt_ant - ant->id);
+                ant->move = ft_start_path(*p, ant, tab, cnt_ant - ant->id);
             else if (ant->room != 1)
                 ant->move = ft_check_disp_room(*p, ant, tab);
             else

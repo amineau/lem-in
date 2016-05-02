@@ -7,12 +7,12 @@ void	ft_display(t_ant **ant, char **list)
     tmp = *ant;
     while (tmp)
     {
-    	if (tmp->move)
-    	{
+     	if (tmp->move)
+     	{
 	        ft_printf("L%d-%s", tmp->id, list[tmp->room]);
 	        if (tmp->next)
 	            ft_putchar(' ');
-    	}
+     	}
         tmp = tmp->next;
     }
     ft_putchar('\n');

@@ -15,6 +15,12 @@ int *ft_tabcpy(int *tab, int length)
     return (new);
 }
 
+void    ft_set_matrice(int **matrice, int x, int y, int val)
+{
+    matrice[y][x] = val;
+	matrice[x][y] = val;
+}
+
 int	ft_path(t_matrice *m, int id, int cnt)
 {
 	int	x;
@@ -26,13 +32,11 @@ int	ft_path(t_matrice *m, int id, int cnt)
 		{
 			if (m->matrice[id][x])
 			{
-				m->matrice[id][x] = 0;
-				m->matrice[x][id] = 0;
+			    ft_set_matrice(m->matrice, x, id, 0);
 				m->tmp[cnt] = x;
 				cnt = ft_path(m, x, ++cnt);
 				m->tmp[cnt - 1] = 0;
-				m->matrice[id][x] = 1;
-				m->matrice[x][id] = 1;
+				ft_set_matrice(m->matrice, x, id, 1);
 			}
 			x++;
 		}
@@ -43,7 +47,6 @@ int	ft_path(t_matrice *m, int id, int cnt)
 	    m->path_min = ft_tabcpy(m->tmp, m->length);
         cnt = 0;
 	}
-	
 	return (cnt);
 }
 
@@ -80,6 +83,8 @@ void    ft_reset_matrice(t_matrice *m, t_path **p)
     while (tmp)
     {
         i = 0;
+        if (tmp->path[0] == 1)
+            ft_set_matrice(m->matrice, 0, 1, 0);
         while (tmp->path[i] != 1)
             ft_clear_matrice(m->matrice, m->length, tmp->path[i++]);
         tmp = tmp->next;
