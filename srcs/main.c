@@ -6,7 +6,7 @@
 /*   By: amineau <amineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 09:27:29 by amineau           #+#    #+#             */
-/*   Updated: 2016/04/21 00:06:13 by amineau          ###   ########.fr       */
+/*   Updated: 2016/05/03 19:23:45 by amineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ int main(void)
     ft_moving_ant(glob, p);
     ft_clear_path(p);
     ft_clear_glob(glob);
+	while (1)
+		;
 	return (0);
 }

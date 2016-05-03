@@ -6,7 +6,7 @@
 /*   By: amineau <amineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/04 10:54:48 by amineau           #+#    #+#             */
-/*   Updated: 2016/01/10 17:58:59 by amineau          ###   ########.fr       */
+/*   Updated: 2016/05/03 19:24:57 by amineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_check_rest(char **rest, char **line)
 		if ((p = ft_strchr(*rest, '\n')))
 		{
 			*line = ft_strndup(*rest, p - *rest);
-			*rest = p + 1;
+			ft_memmove(*rest, p + 1, ft_strlen(p + 1) + 1);
 			return (1);
 		}
 		else
@@ -64,6 +64,7 @@ static char	*ft_trac(char *rest, char **buf)
 	if ((*buf)[i] == '\n')
 	{
 		end = i;
+		ft_strdel(&rest);
 		if (!(rest = ft_memalloc(sizeof(char) * (ft_strlen(*buf) - i))))
 			return (NULL);
 		while ((*buf)[i++])
@@ -72,6 +73,7 @@ static char	*ft_trac(char *rest, char **buf)
 		(*buf)[end] = '\0';
 		return (rest);
 	}
+	ft_strdel(&rest);
 	return (NULL);
 }
 

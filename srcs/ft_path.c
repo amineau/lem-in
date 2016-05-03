@@ -33,7 +33,9 @@ int	ft_path(t_matrice *m, int id, int cnt)
 			if (m->matrice[id][x])
 			{
 			    ft_set_matrice(m->matrice, x, id, 0);
+                ft_printf("cnt1 : %d\n", cnt);
 				m->tmp[cnt] = x;
+                ft_printf("cnt2 : %d\n", cnt);
 				cnt = ft_path(m, x, ++cnt);
 				m->tmp[cnt - 1] = 0;
 				ft_set_matrice(m->matrice, x, id, 1);

@@ -6,13 +6,13 @@
 /*   By: amineau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 13:21:26 by amineau           #+#    #+#             */
-/*   Updated: 2016/04/21 00:04:12 by amineau          ###   ########.fr       */
+/*   Updated: 2016/05/03 19:19:12 by amineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 10
+# define BUFF_SIZE 100
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
