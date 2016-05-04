@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_clear.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amineau <amineau@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/04 16:12:14 by amineau           #+#    #+#             */
+/*   Updated: 2016/05/04 16:12:53 by amineau          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem-in.h"
 
-void    ft_clear_matrice(t_matrice *m)
+void	ft_clear_matrice(t_matrice *m)
 {
 	int	i;
 
 	i = 0;
 	while (i < m->length)
-         free(m->matrice[i++]);
-    free(m->matrice);
-    free(m->path_min);
-    free(m->tmp);
-    free(m);
+		free(m->matrice[i++]);
+	free(m->matrice);
+	free(m->path_min);
+	free(m->tmp);
+	free(m);
 }
 
 void	ft_clear_ant(t_ant **ant)
@@ -44,13 +56,13 @@ void	ft_clear_path(t_path **path)
 	free(path);
 }
 
-void    ft_clear_tabint(int *tab, int length)
+void	ft_clear_tabint(int *tab, int length)
 {
-    int i;
-    
-    i = 0;
-    while (i < length)
-        tab[i++] = 0;
+	int	i;
+
+	i = 0;
+	while (i < length)
+		tab[i++] = 0;
 }
 
 void	ft_clear_tabchar(char **tab)
