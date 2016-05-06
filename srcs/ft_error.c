@@ -6,14 +6,14 @@
 /*   By: amineau <amineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 16:12:59 by amineau           #+#    #+#             */
-/*   Updated: 2016/05/04 16:13:12 by amineau          ###   ########.fr       */
+/*   Updated: 2016/05/04 16:28:55 by amineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	ft_error(void)
 {
-    ft_putendl_fd("ERROR", 2);
-    exit(EXIT_FAILURE);
+	ft_putendl_fd("ERROR", 2);
+	exit(EXIT_FAILURE);
 }

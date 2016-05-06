@@ -6,11 +6,11 @@
 /*   By: amineau <amineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 16:18:49 by amineau           #+#    #+#             */
-/*   Updated: 2016/05/04 16:19:24 by amineau          ###   ########.fr       */
+/*   Updated: 2016/05/04 16:29:15 by amineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	ft_simple_move(t_ant *ant, int room, int *tab)
 {
@@ -60,7 +60,7 @@ int		ft_start_path(t_path *p, t_ant *ant, int *tab, int cnt)
 			if (p->size == 1)
 				p->size = 0;
 			return (1);
-		}          
+		}
 		p = p->next;
 	}
 	return (0);

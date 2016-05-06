@@ -1,10 +1,49 @@
-5
+#commentaire
+#commentaire
+10
+#commentaire
+#commentaire
 ##start
+#commentaire
+#commentaire
 0 0 0
-1 1 1
-2 0 0
 ##end
-3 0 0
+1 0 0
+#commentaire
+2 0 0
+#commentaire
+3 0 -2
+#commentaire ;kjk
+#commentaire
+4 0 0
+# commentaire
+0-2
+#commentaire
+#commentaire
+2-4
+4-3
+#commentaire
+0-3
+#commentaire
+#commentaire
+3-1
+0-4
+#commentaire
+1-4
+2-1
+#commentaire
+2-3
+#commentaire
+#
+#
+#
+#	0---2
+#	|\ /|\
+#	| \ | \
+#	|/ \| |
+#	3---4 |
+#	|  /  /
+#	| /  /
+#	|/  /
+#	1--/
 0-1
-1-2
-1-3

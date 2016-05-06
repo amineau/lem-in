@@ -6,11 +6,11 @@
 /*   By: amineau <amineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 16:13:22 by amineau           #+#    #+#             */
-/*   Updated: 2016/05/04 16:13:51 by amineau          ###   ########.fr       */
+/*   Updated: 2016/05/04 16:26:34 by amineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	ft_starting_room(t_ant **ant)
 {
@@ -25,7 +25,7 @@ void	ft_starting_room(t_ant **ant)
 	}
 }
 
-t_an	*ft_listcreate_ant(int id)
+t_ant	*ft_listcreate_ant(int id)
 {
 	t_ant	*ant;
 

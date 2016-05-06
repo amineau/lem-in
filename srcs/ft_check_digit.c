@@ -10,13 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int	ft_check_digit(char *str)
 {
 	int	i;
 
 	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i++]))
+			return (0);
+	}
+	return (1);
+}
+
+int	ft_check_integer(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] == '-')
+	{
+		if (str[1])
+			i = 1;
+		else
+			return (0);
+	}
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i++]))

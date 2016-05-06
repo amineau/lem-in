@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int		ft_cnt_room(char ***room)
 {
@@ -26,6 +26,8 @@ int		ft_cnt_room(char ***room)
 			if (!ft_strcmp("##start", room[i][0])
 				|| !ft_strcmp("##end", room[i][0]))
 				i++;
+			if (!room[i])
+				ft_error();
 			cnt++;
 		}
 		else

@@ -6,11 +6,11 @@
 /*   By: amineau <amineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 16:14:42 by amineau           #+#    #+#             */
-/*   Updated: 2016/05/04 16:15:45 by amineau          ###   ########.fr       */
+/*   Updated: 2016/05/04 16:29:38 by amineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int			ft_reading_ant(t_global *glob, char *ptr)
 {
@@ -20,7 +20,7 @@ int			ft_reading_ant(t_global *glob, char *ptr)
 	if (ptr[0] == '#' && ft_strcmp("##start", ptr) && ft_strcmp("##end", ptr))
 	{
 		glob->com = ft_straddc(ft_strcln1join(glob->com, ptr), '\n');
-		return(1);
+		return (1);
 	}
 	if (!ft_check_digit(ptr))
 		ft_error();
@@ -44,8 +44,8 @@ int			ft_reading_anthill(t_global *glob, char *ptr)
 	else if (!glob->tunnel && ft_strchr(ptr, ' '))
 	{
 		tab = ft_strsplit(ptr, ' ');
-		if (!ft_check_digit(tab[1]) || !tab[2] || !ft_check_digit(tab[2])
-				|| tab[3] || ptr[0] == 'L')
+		if (!tab[1] || !ft_check_integer(tab[1]) || !tab[2]
+			|| !ft_check_integer(tab[2]) || tab[3] || ptr[0] == 'L')
 			ft_error();
 		ft_clear_tabchar(tab);
 	}

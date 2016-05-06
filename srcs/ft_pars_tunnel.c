@@ -6,11 +6,11 @@
 /*   By: amineau <amineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 16:21:05 by amineau           #+#    #+#             */
-/*   Updated: 2016/05/04 16:22:14 by amineau          ###   ########.fr       */
+/*   Updated: 2016/05/04 16:30:35 by amineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static int	ft_cmp_name(char *tun, char **room)
 {
@@ -70,7 +70,7 @@ char		***ft_pars_tunnel(t_global *glob)
 	while (tab[i + ++lth])
 	{
 		if (!(tunnel[lth] = ft_chtun(tab, i + lth, glob)))
-			break;
+			break ;
 	}
 	tunnel[lth] = NULL;
 	ft_clear_tabchar(tab);

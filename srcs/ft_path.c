@@ -6,13 +6,13 @@
 /*   By: amineau <amineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 16:17:18 by amineau           #+#    #+#             */
-/*   Updated: 2016/05/04 16:18:08 by amineau          ###   ########.fr       */
+/*   Updated: 2016/05/04 16:33:21 by amineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
-void 	ft_set_matrice(int **matrice, int x, int y, int val)
+void	ft_set_matrice(int **matrice, int x, int y, int val)
 {
 	matrice[y][x] = val;
 	matrice[x][y] = val;
@@ -24,15 +24,14 @@ int		ft_path(t_matrice *m, int id, int cnt)
 
 	if (id != 1)
 	{
-		x = -1;
+		x = 0;
 		while (++x < m->length)
 		{
-			if (m->matrice[id][x])
+			if (m->matrice[id][x] && cnt < m->length)
 			{
 				ft_set_matrice(m->matrice, x, id, 0);
 				m->tmp[cnt] = x;
-				cnt = ft_path(m, x, ++cnt);
-				if (cnt > 0)
+				if ((cnt = ft_path(m, x, ++cnt)) > 0)
 					m->tmp[cnt - 1] = 0;
 				ft_set_matrice(m->matrice, x, id, 1);
 			}
@@ -58,7 +57,7 @@ void	ft_clean_matrice(int **matrice, int length, int id)
 		matrice[id][i] = 0;
 		matrice[i++][id] = 0;
 	}
-} 
+}
 
 void	ft_reset_matrice(t_matrice *m, t_path **p)
 {

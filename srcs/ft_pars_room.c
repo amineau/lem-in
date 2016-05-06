@@ -6,11 +6,11 @@
 /*   By: amineau <amineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 16:20:20 by amineau           #+#    #+#             */
-/*   Updated: 2016/05/04 16:20:57 by amineau          ###   ########.fr       */
+/*   Updated: 2016/05/04 17:57:58 by amineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static int	ft_length_partone(char **tab)
 {
@@ -50,6 +50,17 @@ char		***ft_pars_room(char **tab)
 	return (room);
 }
 
+int			ft_check_end_room(char **glob_room, char ***room, int i)
+{
+	while (room[++i] && room[i][0][0] == '#')
+		;
+	if (room[i])
+		*glob_room = ft_strdup(room[i][0]);
+	else
+		ft_error();
+	return (i);
+}
+
 void		ft_stock_room(t_global *glob, char ***room)
 {
 	int	i;
@@ -61,9 +72,9 @@ void		ft_stock_room(t_global *glob, char ***room)
 	while (room[i])
 	{
 		if (!ft_strcmp(room[i][0], "##start"))
-			glob->room[0] = ft_strdup(room[++i][0]);
+			i = ft_check_end_room(&(glob->room[0]), room, i);
 		else if (!ft_strcmp(room[i][0], "##end"))
-			glob->room[1] = ft_strdup(room[++i][0]);
+			i = ft_check_end_room(&(glob->room[1]), room, i);
 		else if (room[i][0][0] != '#')
 			glob->room[id++] = ft_strdup(room[i][0]);
 		i++;
