@@ -83,7 +83,8 @@ t_path	**ft_algo_multi(t_matrice *m, int max_path)
 {
 	t_path	**p;
 
-	p = (t_path**)ft_memalloc(sizeof(t_path*));
+	if (!(p = (t_path**)ft_memalloc(sizeof(t_path*))))
+		ft_error();
 	ft_path(m, 0, 0);
 	if (m->min > m->length)
 		ft_error();

@@ -41,10 +41,14 @@ char		***ft_pars_room(char **tab)
 	char	***room;
 
 	length = ft_length_partone(tab);
-	room = (char***)ft_memalloc(sizeof(char**) * (length + 1));
+	if (!(room = (char***)ft_memalloc(sizeof(char**) * (length + 1))))
+		ft_error();
 	i = -1;
 	while (++i < length)
-		room[i] = ft_strsplit(tab[i], ' ');
+	{
+		if (!(room[i] = ft_strsplit(tab[i], ' ')))
+			ft_error();
+	}
 	room[length] = NULL;
 	ft_clear_tabchar(tab);
 	return (room);
@@ -55,7 +59,10 @@ int			ft_check_end_room(char **glob_room, char ***room, int i)
 	while (room[++i] && room[i][0][0] == '#')
 		;
 	if (room[i])
-		*glob_room = ft_strdup(room[i][0]);
+	{
+		if (!(*glob_room = ft_strdup(room[i][0])))
+			ft_error();
+	}
 	else
 		ft_error();
 	return (i);
@@ -68,7 +75,8 @@ void		ft_stock_room(t_global *glob, char ***room)
 
 	i = 0;
 	id = 2;
-	glob->room = (char**)ft_memalloc(sizeof(char*) * glob->length + 1);
+	if (!(glob->room = (char**)ft_memalloc(sizeof(char*) * glob->length + 1)))
+		ft_error();
 	while (room[i])
 	{
 		if (!ft_strcmp(room[i][0], "##start"))
@@ -76,7 +84,10 @@ void		ft_stock_room(t_global *glob, char ***room)
 		else if (!ft_strcmp(room[i][0], "##end"))
 			i = ft_check_end_room(&(glob->room[1]), room, i);
 		else if (room[i][0][0] != '#')
-			glob->room[id++] = ft_strdup(room[i][0]);
+		{
+			if (!(glob->room[id++] = ft_strdup(room[i][0])))
+				ft_error();
+		}
 		i++;
 	}
 	glob->room[id] = NULL;

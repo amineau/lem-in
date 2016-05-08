@@ -18,7 +18,8 @@ int	*ft_tabcpy(int *tab, int length)
 	int	*new;
 
 	i = 0;
-	new = (int*)ft_memalloc(sizeof(int) * length);
+	if (!(new = (int*)ft_memalloc(sizeof(int) * length)))
+		ft_error();
 	while (i < length)
 	{
 		new[i] = tab[i];

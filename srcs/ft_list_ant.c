@@ -29,7 +29,8 @@ t_ant	*ft_listcreate_ant(int id)
 {
 	t_ant	*ant;
 
-	ant = (t_ant*)ft_memalloc(sizeof(t_ant));
+	if (!(ant = (t_ant*)ft_memalloc(sizeof(t_ant))))
+		ft_error();
 	ant->id = id;
 	ant->next = NULL;
 	return (ant);

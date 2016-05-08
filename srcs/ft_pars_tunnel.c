@@ -31,7 +31,8 @@ static char	**ft_chtun(char **tab, int id, t_global *glob)
 	char	*str;
 	int		i;
 
-	tun = ft_strsplit(tab[id], '-');
+	if (!(tun = ft_strsplit(tab[id], '-')))
+		ft_error();
 	if (tun[0][0] != '#' || !ft_strcmp(tun[0], "##start")
 			|| !ft_strcmp(tun[0], "##end"))
 	{
@@ -59,13 +60,15 @@ char		***ft_pars_tunnel(t_global *glob)
 	char	***tunnel;
 
 	i = 0;
-	tab = ft_strsplit(glob->hill, '\n');
+	if (!(tab = ft_strsplit(glob->hill, '\n')))
+		ft_error();
 	while (tab[i] && (ft_strchr(tab[i], ' ') || tab[i][0] == '#'))
 		i++;
 	lth = 0;
 	while (tab[i + lth])
 		lth++;
-	tunnel = (char***)ft_memalloc(sizeof(char**) * (lth + 1));
+	if (!(tunnel = (char***)ft_memalloc(sizeof(char**) * (lth + 1))))
+		ft_error();
 	lth = -1;
 	while (tab[i + ++lth])
 	{
@@ -97,12 +100,16 @@ int			**ft_stock_tunnel(t_global *glob, char ***tunnel)
 	int	x;
 	int	y;
 
-	matrice = (int**)ft_memalloc(sizeof(int*) * glob->length);
+	if (!(matrice = (int**)ft_memalloc(sizeof(int*) * glob->length)))
+		ft_error();
 	i = 0;
 	while (i < glob->length)
-		matrice[i++] = (int*)ft_memalloc(sizeof(int) * glob->length);
-	i = 0;
-	while (tunnel[i])
+	{
+		if (!(matrice[i++] = (int*)ft_memalloc(sizeof(int) * glob->length)))
+			ft_error();
+	}
+	i = -1;
+	while (tunnel[++i])
 	{
 		if (tunnel[i][0][0] != '#')
 		{
@@ -111,7 +118,6 @@ int			**ft_stock_tunnel(t_global *glob, char ***tunnel)
 			matrice[x][y] = 1;
 			matrice[y][x] = 1;
 		}
-		i++;
 	}
 	return (matrice);
 }

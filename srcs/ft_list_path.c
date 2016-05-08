@@ -16,7 +16,8 @@ t_path	*ft_listcreate_path(int *path, int size)
 {
 	t_path	*p;
 
-	p = (t_path*)ft_memalloc(sizeof(t_path));
+	if (!(p = (t_path*)ft_memalloc(sizeof(t_path))))
+		ft_error();
 	p->size = size;
 	p->path = ft_tabcpy(path, size);
 	p->next = NULL;

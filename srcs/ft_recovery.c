@@ -19,12 +19,13 @@ int			ft_reading_ant(t_global *glob, char *ptr)
 
 	if (ptr[0] == '#' && ft_strcmp("##start", ptr) && ft_strcmp("##end", ptr))
 	{
-		glob->com = ft_straddc(ft_strcln1join(glob->com, ptr), '\n');
+		if (!(glob->com = ft_straddc(ft_strcln1join(glob->com, ptr), '\n')))
+			ft_error();
 		return (1);
 	}
-	if (!ft_check_digit(ptr))
+	if (!(glob->ant = (t_ant**)ft_memalloc(sizeof(t_ant*)))
+		|| !ft_check_digit(ptr))
 		ft_error();
-	glob->ant = (t_ant**)ft_memalloc(sizeof(t_ant*));
 	if ((nb = ft_atoi(ptr)) == 0)
 		ft_error();
 	i = 1;
@@ -51,7 +52,8 @@ int			ft_reading_anthill(t_global *glob, char *ptr)
 	}
 	else
 		glob->tunnel = 1;
-	glob->hill = ft_straddc(ft_strcln1join(glob->hill, ptr), '\n');
+	if (!(glob->hill = ft_straddc(ft_strcln1join(glob->hill, ptr), '\n')))
+		ft_error();
 	return (2);
 }
 
@@ -61,9 +63,9 @@ t_global	*ft_recovery(void)
 	int			status_read;
 	t_global	*glob;
 
-	glob = (t_global*)ft_memalloc(sizeof(t_global));
-	glob->hill = ft_strdup("");
-	glob->com = ft_strdup("");
+	if (!(glob = (t_global*)ft_memalloc(sizeof(t_global)))
+		|| !(glob->hill = ft_strdup("")) || !(glob->com = ft_strdup("")))
+		ft_error();
 	glob->tunnel = 0;
 	status_read = 1;
 	while (get_next_line(0, &ptr) == 1 && status_read)
