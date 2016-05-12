@@ -103,6 +103,6 @@ void	ft_moving_ant(t_global *glob, t_path **p)
 				ant->move = 0;
 			ant = ant->next;
 		}
-		ft_display(glob->ant, glob->room);
+		//ft_display(glob->ant, glob->room);
 	}
 }
