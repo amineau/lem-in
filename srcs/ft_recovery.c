@@ -6,7 +6,7 @@
 /*   By: amineau <amineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/04 16:14:42 by amineau           #+#    #+#             */
-/*   Updated: 2016/05/04 16:29:38 by amineau          ###   ########.fr       */
+/*   Updated: 2016/05/19 16:44:48 by amineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ t_global	*ft_recovery(void)
 	t_global	*glob;
 
 	if (!(glob = (t_global*)ft_memalloc(sizeof(t_global)))
-		|| !(glob->hill = ft_strdup("")) || !(glob->com = ft_strdup("")))
+			|| !(glob->hill = ft_strdup(""))
+			|| !(glob->com = ft_strdup("")))
 		ft_error();
 	glob->tunnel = 0;
 	status_read = 1;
