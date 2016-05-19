@@ -12,29 +12,6 @@
 
 #include "lem_in.h"
 
-void	display_matrice(t_matrice *m)
-{
-	int i;
-	int j;
-
-	ft_putstr("  ");
-	for (i=0; i < m->length; i++)
-		ft_printf("\033[32m%d \033[0m", i);
-	ft_putchar('\n');
-	for (i=0; i < m->length; i++)
-	{
-		ft_printf("\033[32m%d \033[0m",i);
-		for (j=0; j < m->length; j++)
-		{
-			if (m->matrice[i][j])
-				ft_printf("\033[34m");
-			ft_printf("%d ",m->matrice[i][j]);
-			ft_printf("\033[0m");
-		}
-		ft_putchar('\n');
-	}
-}
-
 void	ft_set_matrice(int **matrice, int x, int y, int val)
 {
 	matrice[y][x] = val;
@@ -54,11 +31,9 @@ int		ft_path(t_matrice *m, int id, int cnt)
 			{
 				ft_set_matrice(m->matrice, x, id, 0);
 				m->tmp[cnt] = x;
-				//if ((cnt = ft_path(m, x, ++cnt)) > 0)
-					m->tmp[cnt - 1] = 0;
-				display_matrice(m);
+				if ((cnt = ft_path(m, x, ++cnt)) > 0)
+					m->tmp[--cnt] = 0;
 				ft_set_matrice(m->matrice, x, id, 1);
-
 			}
 		}
 	}
@@ -67,7 +42,6 @@ int		ft_path(t_matrice *m, int id, int cnt)
 		m->min = cnt;
 		ft_memdel((void**)&(m->path_min));
 		m->path_min = ft_tabcpy(m->tmp, m->length);
-		cnt = 0;
 	}
 	return (cnt);
 }
@@ -110,20 +84,10 @@ t_path	**ft_algo_multi(t_matrice *m, int max_path)
 
 	if (!(p = (t_path**)ft_memalloc(sizeof(t_path*))))
 		ft_error();
-	display_matrice(m);
 	ft_path(m, 0, 0);
 	if (m->min > m->length)
 		ft_error();
 	*p = ft_listcreate_path(m->path_min, m->min);
-	/*******************/
-	t_path *tmp;
-	int i;
-	for (tmp = *p; tmp; tmp = tmp->next)
-	{ft_putendl("path");
-	for (i=0;i<tmp->size; i++)
-		ft_printf("%d ",tmp->path[i]);
-	ft_putchar('\n');}
-/*******************/
 	while (--max_path > 0)
 	{
 		ft_reset_matrice(m, p);
