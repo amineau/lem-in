@@ -1,0 +1,4 @@
+object
+*.o
+lem-in
+.DS_Store
